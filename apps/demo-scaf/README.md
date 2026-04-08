@@ -10,12 +10,12 @@ A demo application built on **pyscaf-core** that showcases the plugin-based acti
 - **Entry points**: Actions are registered via `[project.entry-points."pyscaf_core.plugins"]` in `pyproject.toml`
 - **CLI factory**: `build_cli()` from core wires everything together with zero boilerplate
 
-## Usage (Docker)
+## Usage
 
 ```bash
 # From the monorepo root
-docker run --rm -v "$PWD":/workspace -w /workspace ghcr.io/astral-sh/uv:python3.12-bookworm \
-  sh -c "uv sync --all-packages && uv run demo-scaf init my-project --no-install"
+uv sync --all-packages
+uv run demo-scaf init my-project --no-install
 ```
 
 ## Creating your own plugin app
