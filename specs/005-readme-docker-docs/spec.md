@@ -1,5 +1,7 @@
 # F005 — Minimal README: architecture one-pager, Docker workflow
 
+**⚠️ SUPERSEDED by F006** — README now documents native `uv` only; Docker workflow is obsolete. See `specs/006-remove-docker-use-uv/` and the root `README.md`.
+
 **Feature ID**: F005  
 **Phase**: 0  
 **Status**: Ready for implementation  

@@ -14,63 +14,40 @@
 
 See [specs/roadmap/roadmap.md](specs/roadmap/roadmap.md).
 
-## Development (Docker)
+## Prerequisites
 
-Run all Python, uv, and tooling commands **inside Docker** from the repository root (`$PWD` = repo root).
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) on your machine (Python toolchain and package manager).
 
-Sync the workspace and install all members:
+## Development
+
+From the repository root, sync the workspace and install all members:
 
 ```bash
-docker run --rm -v "$PWD":/workspace -w /workspace ghcr.io/astral-sh/uv:python3.12-bookworm \
-  sh -c "uv sync --all-packages"
+uv sync --all-packages
 ```
 
 Import check:
 
 ```bash
-docker run --rm -v "$PWD":/workspace -w /workspace ghcr.io/astral-sh/uv:python3.12-bookworm \
-  sh -c "uv sync --all-packages && uv run python -c \"import pyscaf_core; print(pyscaf_core.__version__)\""
+uv run python -c "import pyscaf_core; print(pyscaf_core.__version__)"
 ```
 
 Run the demo app:
 
 ```bash
-docker run --rm -v "$PWD":/workspace -w /workspace ghcr.io/astral-sh/uv:python3.12-bookworm \
-  sh -c "uv sync --all-packages && uv run demo-scaf"
+uv run demo-scaf
 ```
 
 Lint with Ruff:
 
 ```bash
-docker run --rm -v "$PWD":/workspace -w /workspace ghcr.io/astral-sh/uv:python3.12-bookworm \
-  sh -c "uv sync --all-packages && uv run ruff check ."
+uv run ruff check .
 ```
 
 Run tests:
 
 ```bash
-docker run --rm -v "$PWD":/workspace -w /workspace ghcr.io/astral-sh/uv:python3.12-bookworm \
-  sh -c "uv sync --all-packages && uv run pytest -q"
-```
-
-Full validation (sync, import, demo, ruff, pytest):
-
-```bash
-docker run --rm -v "$PWD":/workspace -w /workspace ghcr.io/astral-sh/uv:python3.12-bookworm \
-  sh -c "uv sync --all-packages && uv run python -c 'import pyscaf_core; print(pyscaf_core.__version__)' && uv run demo-scaf && uv run ruff check . && uv run pytest -q"
-```
-
-Optional: build and use the local dev image (after `Dockerfile` is present):
-
-```bash
-docker build -t pyscaf-core-dev .
-docker run --rm -v "$PWD":/workspace -w /workspace pyscaf-core-dev
-```
-
-Optional Compose service:
-
-```bash
-docker compose run --rm dev sh -c "uv sync --all-packages && uv run pytest -q"
+uv run pytest -q
 ```
 
 ## Resolved decisions

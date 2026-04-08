@@ -39,3 +39,11 @@
 - [X] F404 — Tests + root `pytest` testpaths
 - [X] F405 — `apps/demo-scaf/README.md`
 - [X] Validation (Docker: ruff, pytest, CLI smoke)
+
+# Phase 5 — Remove Docker, native uv workflow
+
+- [X] F006 — Remove Docker artifacts (Dockerfile, compose.yaml, .dockerignore)
+- [X] F006 — Add .gitignore, clean __pycache__ from tracking
+- [X] F006 — Rewrite README with native uv commands
+- [X] F006 — Mark F004/F005 as superseded
+- [X] F006 — Validation (uv sync, ruff, pytest)

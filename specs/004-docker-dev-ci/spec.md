@@ -1,5 +1,7 @@
 # F004 — Docker dev/CI image: uv, ruff, pytest
 
+**⚠️ SUPERSEDED by F006** — Docker-based dev workflow was removed in favor of native `uv` on the host. See `specs/006-remove-docker-use-uv/` and the root `README.md`.
+
 **Feature ID**: F004  
 **Phase**: 0  
 **Status**: Ready for implementation  
