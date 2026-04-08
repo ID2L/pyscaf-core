@@ -1,0 +1,25 @@
+---
+description: Apply naming conventions for the scaffolder project. Use when creating files, classes, or modules.
+globs: src/**/*.py, tests/**/*.py
+alwaysApply: false
+---
+
+Project Naming:
+- Package name: `septeo_scaffolder` (underscore for Python import)
+- CLI command: `septeo-scaf` (hyphen for CLI)
+- PyPI name: `septeo-agentic-scaffolder`
+
+Action Naming:
+- Action class: `<Name>Action` (e.g., `CoreAction`, `GitAction`)
+- Action module dir: lowercase, hyphen-separated (e.g., `semantic-release/`)
+- Action ID: class name minus "Action", lowered (e.g., `core`, `git`)
+
+File Naming:
+- Source: `src/septeo_scaffolder/`
+- Tests: `tests/` mirroring `src/` structure
+- Templates: `template_<name>.<ext>` or `template.<ext>`
+- Config: `config.toml` inside action dirs
+
+Context Keys:
+- CLI flag `--remote-url` → context key `remote_url`
+- `None` = not yet set; `False` = explicitly disabled

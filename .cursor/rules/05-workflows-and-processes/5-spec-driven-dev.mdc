@@ -1,0 +1,22 @@
+---
+description: Apply Spec-Driven Development workflow for new features. Use when planning or implementing features.
+globs: specs/**/*.md, _todo.md
+alwaysApply: false
+---
+
+Workflow:
+- `/specify [feature]` → Create spec in `specs/XXX-feature-name/`
+- Review `spec.md`, `plan.md`, `tasks.md`
+- `/implement XXX` → Execute tasks with TDD
+- `/review-implement` → Code review
+- Track progress in `tasks.md` and `_todo.md`
+
+Spec Structure:
+- `spec.md` — Feature specification (what)
+- `plan.md` — Implementation plan (how)
+- `tasks.md` — Granular tasks with checkboxes
+
+Avoid:
+- Implementing without a spec for non-trivial features
+- Skipping the review step
+- Modifying specs after implementation starts without re-review

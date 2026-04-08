@@ -1,0 +1,20 @@
+---
+description: Apply Ruff linter/formatter configuration. Use when writing or reviewing Python code.
+globs: "**/*.py"
+alwaysApply: false
+---
+
+Ruff Configuration (in pyproject.toml):
+- `src = ["src", "tests"]`
+- `line-length = 120`
+- Rules: `B` (bugbear), `C4` (comprehensions), `E` (pycodestyle), `F` (pyflakes), `N` (naming), `W` (warnings), `I` (isort), `UP` (pyupgrade)
+
+Workflow:
+- `uv run ruff check src/ tests/` — lint
+- `uv run ruff format src/ tests/` — format
+- Fix auto-fixable issues: `uv run ruff check --fix`
+
+Avoid:
+- `# noqa` without specific rule code
+- Disabling rules globally without justification
+- Template files should be excluded from linting

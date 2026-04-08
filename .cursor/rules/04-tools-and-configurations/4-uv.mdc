@@ -1,0 +1,21 @@
+---
+description: Apply uv package manager patterns. Use when managing dependencies or running project commands.
+globs: pyproject.toml, uv.lock
+alwaysApply: false
+---
+
+Package Management:
+- Use `uv add <pkg>` to add dependencies
+- Use `uv add --dev <pkg>` for dev dependencies
+- Use `uv sync` to install all dependencies
+- Use `uv run <cmd>` to run commands in the venv
+
+Build:
+- Build system: `hatchling`
+- Package layout: `src/` layout with `src/septeo_scaffolder/`
+- Entry point: `[project.scripts]` in `pyproject.toml`
+
+Avoid:
+- `pip install` directly — use `uv add`
+- Manual venv management — `uv` handles it
+- Editing `uv.lock` manually

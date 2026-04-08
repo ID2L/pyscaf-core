@@ -1,0 +1,28 @@
+---
+description: Apply clean code principles in all Python files. Use for code quality enforcement.
+globs: src/**/*.py, tests/**/*.py
+alwaysApply: false
+---
+
+Naming:
+- Functions and variables: `snake_case`
+- Classes: `PascalCase`
+- Constants: `UPPER_SNAKE_CASE`
+- Private: prefix with `_`
+
+Functions:
+- Max 20 lines per function (aim for 10)
+- Single responsibility — one function, one purpose
+- Max 3 parameters; use dataclass/Pydantic model for more
+- Return early to avoid deep nesting
+
+Classes:
+- Prefer composition over inheritance
+- Keep `__init__` minimal — delegate to factory methods if complex
+- Use `@property` for computed attributes
+
+Avoid:
+- Mutable default arguments (`def f(x=[])`)
+- Bare `except:` — always catch specific exceptions
+- Magic numbers — use named constants
+- Comments that restate the code

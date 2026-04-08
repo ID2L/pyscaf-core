@@ -1,0 +1,35 @@
+---
+description: Apply pytest 8.x testing patterns. Use when writing or modifying tests.
+globs: tests/**/*.py, tests/**/*.yaml
+alwaysApply: false
+---
+
+Test Structure:
+- Unit tests: `tests/<module>/test_*.py`
+- Action tests: `tests/actions/<action>/test_*.yaml` (YAML-driven)
+- Test data: `tests/<module>/test_data/`
+
+Patterns:
+- AAA: Arrange, Act, Assert
+- Use `pytest.fixture` for shared setup
+- Use `@pytest.mark.parametrize` for data-driven tests
+- Use `tmp_path` fixture for filesystem tests
+
+YAML Test Format (for actions):
+- `cli_arguments.options` — CLI flags to pass
+- `checks` — list of assertions (`exist`, `contains`, `not_exist`, `not_contains`)
+
+Markers:
+- `@pytest.mark.unit` — fast unit tests
+- `@pytest.mark.integration` — slower integration tests
+- `@pytest.mark.slow` — very slow tests
+
+Running:
+- All: `uv run pytest`
+- Specific: `uv run pytest tests/actions/ --action-filter="core" -v`
+- Coverage: `uv run pytest --cov=septeo_scaffolder --cov-report=term-missing`
+
+Avoid:
+- Tests without assertions
+- Mocking internal modules — mock at boundaries only
+- Test interdependencies — each test must be independent

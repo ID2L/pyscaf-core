@@ -1,0 +1,27 @@
+---
+description: Apply Questionary 2.x patterns for interactive prompts. Use for interactive CLI mode.
+globs: src/**/manager.py, src/**/cli.py
+alwaysApply: false
+---
+
+Prompt Types:
+- `questionary.confirm()` for yes/no (returns `bool`)
+- `questionary.text()` for free text (returns `str`)
+- `questionary.select()` for single choice (returns selected `str`)
+- `questionary.checkbox()` for multi-choice (returns `list[str]`)
+
+Patterns:
+- Always provide `default=` parameter
+- Chain `.ask()` to get the answer synchronously
+- Handle `None` return (user pressed Ctrl+C)
+- Convert display values back to keys after selection
+
+Integration with Actions:
+- Each action defines `cli_options: list[CLIOption]`
+- Manager iterates actions in order, asks questions for missing context
+- Skip questions when value already in context (from CLI args)
+
+Avoid:
+- `input()` — use questionary for consistent UX
+- Blocking prompts without default values
+- Mixing questionary styles within same flow

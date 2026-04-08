@@ -1,0 +1,27 @@
+---
+description: Apply plugin-based scaffolder architecture when creating or modifying actions, manager, or CLI. Use for structural decisions.
+globs: src/**/*.py
+alwaysApply: false
+---
+
+Plugin Architecture (pyscaf-inspired):
+- Each action is a self-contained module in `src/septeo_scaffolder/actions/<name>/`
+- Actions are auto-discovered via `pkgutil.iter_modules` — no manual registration
+- Each action inherits from `Action` base class
+- Action lifecycle: `skeleton()` → `init()` → `install()`
+
+Dependency Resolution:
+- Actions declare `depends: set[str]` and `run_preferably_after: str | None`
+- Execution order computed by preference-chain algorithm at runtime
+- If `len(depends) > 1`, `run_preferably_after` is mandatory
+
+Action Module Structure:
+- `__init__.py` — Action class with `cli_options`, `depends`, lifecycle methods
+- `config.toml` — Optional pyproject.toml merge config
+- `templates/` — Jinja2 or static templates
+- `README.md` — Action documentation
+
+Avoid:
+- Hardcoding action registration lists
+- Circular dependencies between actions
+- Actions that modify other actions' output directly

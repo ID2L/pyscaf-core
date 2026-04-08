@@ -1,0 +1,24 @@
+---
+description: Apply Git conventions for commits and branching. Use for version control operations.
+globs: "**/*"
+alwaysApply: false
+---
+
+Commits (Conventional Commits):
+- `feat:` — new feature
+- `fix:` — bug fix
+- `refactor:` — code restructuring without behavior change
+- `test:` — adding or updating tests
+- `docs:` — documentation changes
+- `chore:` — maintenance tasks
+- `ci:` — CI/CD changes
+
+Branching:
+- `main` — stable release branch
+- `feat/<name>` — feature branches
+- `fix/<name>` — bugfix branches
+
+Avoid:
+- Force pushing to `main`
+- Commits without conventional prefix
+- Large commits mixing features and refactoring

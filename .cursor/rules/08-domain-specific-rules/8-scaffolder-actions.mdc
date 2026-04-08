@@ -1,0 +1,31 @@
+---
+description: Apply scaffolder action patterns when creating new actions. Use when adding features to the scaffolder.
+globs: src/**/actions/**/*.py
+alwaysApply: false
+---
+
+New Action Checklist:
+- Write YAML tests first (TDD)
+- Create `src/septeo_scaffolder/actions/<name>/__init__.py`
+- Define class inheriting from `Action`
+- Declare `depends`, `run_preferably_after`, `cli_options`
+- Implement `skeleton()`, `init()`, `install()`, `activate()`
+- Add `config.toml` if pyproject.toml settings needed
+- Auto-discovered — no registration needed
+
+Action Lifecycle:
+- `skeleton(context)` → returns `dict[Path, str | None]` (files/dirs to create)
+- `init(context)` → post-skeleton setup (default: merge config.toml)
+- `install(context)` → dependency installation
+- `activate(context)` → guard condition (return `False` to skip)
+
+CLI Options:
+- Use `CLIOption` Pydantic model
+- Types: `str`, `bool`, `int`, `choice`
+- `ChoiceOption(key, display, value)` for rich choices
+- `postfill_hook` for context transformation after user input
+
+Avoid:
+- Actions that depend on execution order beyond declared deps
+- Direct filesystem operations outside `skeleton()` return
+- Hardcoded paths — use `self.project_path / relative`

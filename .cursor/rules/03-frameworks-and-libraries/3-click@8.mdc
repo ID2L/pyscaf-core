@@ -1,0 +1,30 @@
+---
+description: Apply Click 8.x CLI patterns when working on CLI layer. Use for command definitions and options.
+globs: src/**/cli.py, src/**/cli/**/*.py
+alwaysApply: false
+---
+
+CLI Structure:
+- Use `@click.group()` for the root command
+- Use `@group.command()` for subcommands
+- Pass shared state via `ctx.obj` or `@click.pass_context`
+
+Options:
+- Use `@click.option()` with `help=` always
+- Boolean flags: `--flag/--no-flag` pattern
+- Choices: `click.Choice(keys, case_sensitive=False)`
+- Dynamic options injected via decorator pattern (see `add_dynamic_options`)
+
+Arguments:
+- Use `@click.argument()` for positional args
+- Validate with `type=click.Path(exists=True)` for paths
+
+Error Handling:
+- Use `click.ClickException` for user-facing errors
+- Use `ctx.exit(code)` for clean exits
+- Wrap main entry in try/except for graceful error display
+
+Avoid:
+- `sys.argv` parsing — let Click handle it
+- Mixing Click and argparse
+- Long callback functions — delegate to service layer

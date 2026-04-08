@@ -1,0 +1,26 @@
+---
+description: Apply Pydantic 2.x patterns for data models and validation. Use for models, config, and CLI options.
+globs: src/**/*.py
+alwaysApply: false
+---
+
+Models:
+- Inherit from `BaseModel` for data structures
+- Use `Field()` with constraints: `gt=`, `min_length=`, `pattern=`
+- Use `Annotated[type, Field(...)]` for complex field metadata
+- Use `model_dump()` / `model_validate()` (not deprecated `.dict()`)
+
+Validation:
+- Use `@field_validator` for custom field validation
+- Use `@model_validator(mode='after')` for cross-field validation
+- Raise `ValueError` in validators — Pydantic wraps it
+
+Configuration:
+- Use `model_config = ConfigDict(...)` instead of inner `class Config`
+- Set `strict=True` where type coercion is unwanted
+- Use `frozen=True` for immutable models
+
+Avoid:
+- `.dict()` / `.json()` — use `model_dump()` / `model_dump_json()`
+- `@validator` — use `@field_validator` (Pydantic v2)
+- Mutable default values in Field — use `default_factory`

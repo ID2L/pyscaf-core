@@ -1,0 +1,22 @@
+---
+globs: **/*.*
+alwaysApply: true
+---
+
+Context:
+- Read `./docs/**/*.md` for project knowledge
+- Use MCP tools when available (Context7, Playwright, pyscaf Docs)
+- Consult `AGENTS.md` as the project constitution before major changes
+
+Task Management:
+- Create `_todo.md` at project root if not exists
+- Track progress with `[X]` completed and `[ ]` pending
+- ALWAYS refer to `_todo.md` when planning next step
+
+File Operations:
+- ALWAYS read file before writing
+- ALWAYS check if file/folder exists before creating
+
+Language:
+- Respond in French
+- Code comments and identifiers in English

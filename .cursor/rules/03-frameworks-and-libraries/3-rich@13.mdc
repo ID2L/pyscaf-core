@@ -1,0 +1,26 @@
+---
+description: Apply Rich 13.x patterns for terminal output. Use for console output and formatting.
+globs: src/**/*.py
+alwaysApply: false
+---
+
+Console Usage:
+- Use single `Console()` instance per module
+- Use `console.print()` with Rich markup: `[bold green]Success[/bold green]`
+- Use `console.print()` over `print()` for all user-facing output
+
+Formatting:
+- Status messages: `[bold blue]Action...[/bold blue]`
+- Success: `[bold green]Done![/bold green]`
+- Warning: `[bold yellow]Warning...[/bold yellow]`
+- Error: `[bold red]Error:[/bold red]`
+
+Advanced:
+- Use `Table` for structured data display
+- Use `Progress` for long operations
+- Use `Panel` for highlighted sections
+
+Avoid:
+- Raw `print()` for user-facing output
+- ANSI escape codes — let Rich handle colors
+- Multiple Console instances in the same module
