@@ -1,6 +1,88 @@
 # CHANGELOG
 
 
+## v0.2.0 (2026-04-11)
+
+### Chores
+
+- Ignore apps directory in gitignore
+  ([`05ea3fb`](https://github.com/ID2L/pyscaf-core/commit/05ea3fb0d223451d72c69d21853b7dd534167e06))
+
+Stress-test apps are workspace-local and should not be tracked.
+
+Made-with: Cursor
+
+- Update lockfile after testing framework changes
+  ([`4acdebe`](https://github.com/ID2L/pyscaf-core/commit/4acdebe771a653999bf425867b984969ddc4af9d))
+
+Made-with: Cursor
+
+### Documentation
+
+- **roadmap**: Add stress-test feature inventory and roadmap
+  ([`ca5c892`](https://github.com/ID2L/pyscaf-core/commit/ca5c892bf8ce5474e56d7d2a7c7628e7df19e252))
+
+Feature inventory mapping pyscaf/septeo-scaf actions to pyscaf-core coverage, plus phased roadmap
+  for the stress-test migration.
+
+Made-with: Cursor
+
+- **specs**: Add entry point refactoring specification
+  ([`09a353e`](https://github.com/ID2L/pyscaf-core/commit/09a353e97f35e7ce5e1e27d04a8211ab4aec8640))
+
+Spec 901 describes the refactoring of per-action entry points to single discover_actions callables,
+  and the shared YAML testing framework.
+
+Made-with: Cursor
+
+- **specs**: Add pyscaf actions port specification
+  ([`a436e7c`](https://github.com/ID2L/pyscaf-core/commit/a436e7c0b06bcbbfbe330b4434785a85ed047e31))
+
+Spec 701 defines the plan to port all pyscaf actions (core, git, license, jupyter, test,
+  semantic-release, documentation, jupyter-tools) to pyscaf-core.
+
+Made-with: Cursor
+
+- **specs**: Add septeo-scaf actions port specification
+  ([`d759414`](https://github.com/ID2L/pyscaf-core/commit/d7594146be894fa6e982581a4544701cb44ae7bb))
+
+Spec 801 defines the plan to port septeo-scaf-specific actions (docker, python, agents, rules, etc.)
+  to the pyscaf-core monorepo.
+
+Made-with: Cursor
+
+- **specs**: Add stress-test apps skeleton specification
+  ([`5e4ddf9`](https://github.com/ID2L/pyscaf-core/commit/5e4ddf91ff933ea1cfc78284d08ab2ef9890e537))
+
+Spec 601 defines the structure for demo-scaf, pyscaf and septeo-scaf stress-test applications that
+  validate the pyscaf-core plugin API.
+
+Made-with: Cursor
+
+### Features
+
+- Track stress-test apps in repository
+  ([`09d6e7c`](https://github.com/ID2L/pyscaf-core/commit/09d6e7cb8b85b354b2f376942324b52ef7713f81))
+
+Add demo-scaf, pyscaf-app, and septeo-scaf workspace apps. These serve as stress-test and validation
+  apps for the pyscaf-core plugin API.
+
+Made-with: Cursor
+
+- **pyscaf-core**: Add shared testing framework and pytest plugin
+  ([`0f8d0d5`](https://github.com/ID2L/pyscaf-core/commit/0f8d0d584a41654583c467992a9ef154d1d0a647))
+
+- ActionTestRunner: YAML-driven action test runner (adapted from pyscaf) - discover_test_files():
+  filesystem-based YAML discovery - discover_test_files_from_entry_points(): entry-point-based
+  discovery - create_yaml_tests(): one-liner to create parametrized pytest functions - pytest plugin
+  with --action-filter option (via pytest11 entry point)
+
+Downstream packages can now test actions with minimal boilerplate: test_action =
+  create_yaml_tests("my-cli")
+
+Made-with: Cursor
+
+
 ## v0.1.0 (2026-04-10)
 
 ### Bug Fixes
