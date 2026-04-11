@@ -1,6 +1,41 @@
 # CHANGELOG
 
 
+## v0.2.2 (2026-04-11)
+
+### Bug Fixes
+
+- **pyscaf-core**: Expand list-valued YAML options into repeated CLI flags
+  ([`088b84f`](https://github.com/ID2L/pyscaf-core/commit/088b84f34283d888d9fd9ce6b9a3ace933447510))
+
+_build_cli_command() was calling str() on list values, producing "['backend', 'frontend']" instead
+  of --key backend --key frontend. This forced downstream projects (septeo-scaf) to subclass the
+  runner.
+
+Made-with: Cursor
+
+- **pyscaf-core**: Merge fix/002-list-options-cli-command
+  ([`9def33a`](https://github.com/ID2L/pyscaf-core/commit/9def33ae3d56608a05fe71675caba6b3cd6f2f99))
+
+Handle list-valued YAML options in ActionTestRunner._build_cli_command()
+
+### Chores
+
+- Update .gitignore and versioning for pyscaf-core
+  ([`401d85a`](https://github.com/ID2L/pyscaf-core/commit/401d85ab34548bdfaf3f803593f443826925fceb))
+
+- Added 'Thumbs.db' to .gitignore to prevent tracking of Windows thumbnail cache files. - Included
+  'apps/*' in .gitignore to ignore all demo applications. - Updated version of pyscaf-core from
+  0.1.0 to 0.2.0 in uv.lock and corresponding test to reflect the new version.
+
+### Documentation
+
+- **specs**: Add spec, plan, tasks and review for fix 002-list-options-cli-command
+  ([`a1f0538`](https://github.com/ID2L/pyscaf-core/commit/a1f0538415f033f73ece70c94aa159b42e9f90d9))
+
+Made-with: Cursor
+
+
 ## v0.2.1 (2026-04-11)
 
 ### Bug Fixes
