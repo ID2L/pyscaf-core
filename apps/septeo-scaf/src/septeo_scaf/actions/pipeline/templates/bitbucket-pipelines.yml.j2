@@ -1,0 +1,58 @@
+image: atlassian/default-image:4
+
+pipelines:
+  default:
+    - step:
+        name: Build & Test
+        caches:
+{%- if has_python %}
+          - pip
+{%- endif %}
+{%- if has_javascript %}
+          - node
+{%- endif %}
+{%- if has_php %}
+          - composer
+{%- endif %}
+        script:
+{%- if has_python %}
+          - pip install uv
+          - uv sync
+          - uv run ruff check src/ tests/
+          - uv run pytest
+{%- endif %}
+{%- if has_php %}
+          - composer install --no-interaction
+          - vendor/bin/phpstan analyse
+          - vendor/bin/php-cs-fixer fix --dry-run --diff
+          - vendor/bin/phpunit
+{%- endif %}
+{%- if has_javascript %}
+          - bun install
+          - bun run lint
+          - bun run test
+{%- endif %}
+
+  branches:
+    main:
+      - step:
+          name: Build & Test
+          script:
+{%- if has_python %}
+            - pip install uv
+            - uv sync
+            - uv run pytest
+{%- endif %}
+{%- if has_php %}
+            - composer install --no-interaction
+            - vendor/bin/phpunit
+{%- endif %}
+{%- if has_javascript %}
+            - bun install
+            - bun run test
+{%- endif %}
+      - step:
+          name: Deploy
+          deployment: production
+          script:
+            - echo "Deploy {{ project_name }}"

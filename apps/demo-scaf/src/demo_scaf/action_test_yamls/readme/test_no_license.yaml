@@ -1,0 +1,13 @@
+cli_arguments:
+  options:
+    add-license: false
+
+checks:
+  - name: "README.md exists"
+    type: exist
+    file_path: "tmp_project/README.md"
+
+  - name: "README.md has no license section"
+    type: not_contains
+    file_path: "tmp_project/README.md"
+    content: "## License"

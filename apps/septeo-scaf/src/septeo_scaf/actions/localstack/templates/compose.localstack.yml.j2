@@ -1,0 +1,17 @@
+services:
+  localstack:
+    image: localstack/localstack-pro
+    container_name: {{ project_name }}-localstack
+    ports:
+      - "4566:4566"
+      - "4510-4559:4510-4559"
+    environment:
+      - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
+      - DEBUG=0
+      - SERVICES=s3,lambda,secretsmanager,sqs
+    volumes:
+      - "./init/ready.d:/etc/localstack/init/ready.d"
+      - "localstack_data:/var/lib/localstack"
+
+volumes:
+  localstack_data:

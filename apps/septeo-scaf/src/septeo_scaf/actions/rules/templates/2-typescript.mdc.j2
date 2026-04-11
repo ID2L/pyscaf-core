@@ -1,0 +1,19 @@
+---
+description: Apply TypeScript patterns and idioms. Use for all TypeScript files.
+globs: "**/*.ts", "**/*.tsx"
+alwaysApply: false
+---
+
+TypeScript:
+- Enable strict mode in tsconfig
+- Prefer `interface` for object shapes
+- Use `type` for unions and aliases
+- Avoid `any` — use `unknown` when type is uncertain
+
+Imports:
+- Use path aliases for clean imports
+- Prefer named exports over default exports
+
+Avoid:
+- Non-null assertion (`!`) when optional chaining works
+- Type assertions (`as`) without validation

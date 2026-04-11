@@ -1,0 +1,18 @@
+import { defineConfig } from "vite";
+{%- if frontend_tech == "react" %}
+import react from "@vitejs/plugin-react";
+{%- elif frontend_tech == "vue" %}
+import vue from "@vitejs/plugin-vue";
+{%- elif frontend_tech == "svelte" %}
+import { svelte } from "@sveltejs/vite-plugin-svelte";
+{%- endif %}
+
+export default defineConfig({
+{%- if frontend_tech == "react" %}
+  plugins: [react()],
+{%- elif frontend_tech == "vue" %}
+  plugins: [vue()],
+{%- elif frontend_tech == "svelte" %}
+  plugins: [svelte()],
+{%- endif %}
+});

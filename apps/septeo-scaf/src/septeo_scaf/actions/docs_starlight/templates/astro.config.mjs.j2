@@ -1,0 +1,17 @@
+import { defineConfig } from "astro/config";
+import starlight from "@astrojs/starlight";
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: "{{ project_name }}",
+      defaultLocale: "en",
+      sidebar: [
+        {
+          label: "Guides",
+          autogenerate: { directory: "guides" },
+        },
+      ],
+    }),
+  ],
+});

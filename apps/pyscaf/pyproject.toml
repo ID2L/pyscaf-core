@@ -1,24 +1,28 @@
 [project]
-name = "demo-scaf"
+name = "pyscaf-app"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = ["pyscaf-core"]
+dependencies = [
+    "pyscaf-core",
+    "tomli>=2.0.0",
+    "tomli-w>=1.0.0",
+]
 
 [project.scripts]
-demo-scaf = "demo_scaf.main:main"
+pyscaf-app = "pyscaf_app.main:main"
 
 [project.entry-points."pyscaf_core.plugins"]
-demo_scaf = "demo_scaf.actions:discover_actions"
+pyscaf_app = "pyscaf_app.actions:discover_actions"
 
 [project.entry-points."pyscaf_core.test_yamls"]
-demo_scaf = "demo_scaf.testing:get_test_config"
+pyscaf_app = "pyscaf_app.testing:get_test_config"
 
 [build-system]
 requires = ["hatchling>=1.26.0"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/demo_scaf"]
+packages = ["src/pyscaf_app"]
 
 [tool.uv.sources]
 pyscaf-core = { workspace = true }

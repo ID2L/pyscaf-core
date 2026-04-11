@@ -1,0 +1,9 @@
+[dependency-groups]
+dev = [
+    "jupyter",
+    "notebook",
+    "nbconvert",
+    "ipykernel",
+    "matplotlib",
+    "pandas",
+]

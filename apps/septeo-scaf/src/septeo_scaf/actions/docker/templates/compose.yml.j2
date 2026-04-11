@@ -1,0 +1,46 @@
+services:
+{% for svc in services %}
+  {{ svc.name }}:
+    build:
+      context: .
+      dockerfile: .docker/{{ svc.name }}/Dockerfile
+    volumes:
+      - ./{{ svc.dir }}:/app
+{%- if svc.tech == "python" %}
+      - /app/.venv
+{%- elif svc.tech == "php" %}
+      - /app/vendor
+{%- elif svc.tech == "node" %}
+      - /app/node_modules
+{%- endif %}
+    ports:
+      - "{{ svc.port }}:{{ svc.port }}"
+{% endfor %}
+{%- if database and database != "none" %}
+  db:
+{%- if "postgres" in database %}
+    image: postgres:{{ database.split("-")[1] }}
+    environment:
+      POSTGRES_DB: {{ project_name | replace("-", "_") }}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+{%- elif database == "mysql-8" %}
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: {{ project_name | replace("-", "_") }}
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+{%- endif %}
+{%- endif %}
+{%- if database and database != "none" %}
+
+volumes:
+  db_data:
+{%- endif %}

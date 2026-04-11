@@ -1,0 +1,19 @@
+cli_arguments:
+  options:
+    greeting: "hi"
+    author: "tester"
+
+checks:
+  - name: "HELLO.md exists"
+    type: exist
+    file_path: "tmp_project/HELLO.md"
+
+  - name: "HELLO.md contains Hi there!"
+    type: contains
+    file_path: "tmp_project/HELLO.md"
+    content: "Hi there!"
+
+  - name: "HELLO.md contains author name"
+    type: contains
+    file_path: "tmp_project/HELLO.md"
+    content: "tester"

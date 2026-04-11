@@ -1,24 +1,28 @@
 [project]
-name = "demo-scaf"
+name = "septeo-scaf"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = ["pyscaf-core"]
+dependencies = [
+    "pyscaf-core",
+    "jinja2>=3.0.0",
+    "tomlkit>=0.13.0",
+]
 
 [project.scripts]
-demo-scaf = "demo_scaf.main:main"
+septeo-scaf = "septeo_scaf.main:main"
 
 [project.entry-points."pyscaf_core.plugins"]
-demo_scaf = "demo_scaf.actions:discover_actions"
+septeo_scaf = "septeo_scaf.actions:discover_actions"
 
 [project.entry-points."pyscaf_core.test_yamls"]
-demo_scaf = "demo_scaf.testing:get_test_config"
+septeo_scaf = "septeo_scaf.testing:get_test_config"
 
 [build-system]
 requires = ["hatchling>=1.26.0"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/demo_scaf"]
+packages = ["src/septeo_scaf"]
 
 [tool.uv.sources]
 pyscaf-core = { workspace = true }

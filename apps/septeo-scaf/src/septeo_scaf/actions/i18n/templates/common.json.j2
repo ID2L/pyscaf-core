@@ -1,0 +1,12 @@
+{
+  "app_name": "{{ project_name }}",
+{% if lang == "en" %}
+  "welcome": "Welcome to {{ project_name }}"
+{% elif lang == "fr" %}
+  "welcome": "Bienvenue sur {{ project_name }}"
+{% elif lang == "es" %}
+  "welcome": "Bienvenido a {{ project_name }}"
+{% elif lang == "de" %}
+  "welcome": "Willkommen bei {{ project_name }}"
+{% endif %}
+}

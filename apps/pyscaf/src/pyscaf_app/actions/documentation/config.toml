@@ -1,0 +1,12 @@
+[dependency-groups]
+dev = [
+    "pdoc",
+    "tomli",
+]
+
+[project.scripts]
+gen-doc = "pyscaf.documentation.scripts.parse_doc:gen_doc"
+serve-doc = "pyscaf.documentation.scripts.parse_doc:serve_doc"
+
+[tool.pyscaf.documentation]
+output_path = "docs"

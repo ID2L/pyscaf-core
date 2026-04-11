@@ -1,0 +1,14 @@
+checks:
+  - name: "README.md exists"
+    type: exist
+    file_path: "tmp_project/README.md"
+
+  - name: "README.md has project title"
+    type: contains
+    file_path: "tmp_project/README.md"
+    content: "# tmp_project"
+
+  - name: "README.md has license section by default"
+    type: contains
+    file_path: "tmp_project/README.md"
+    content: "## License"

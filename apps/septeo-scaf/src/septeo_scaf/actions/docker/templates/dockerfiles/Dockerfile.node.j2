@@ -1,0 +1,10 @@
+FROM oven/bun:latest
+
+WORKDIR /app
+
+COPY {{ service.dir }}/package.json {{ service.dir }}/bun.lock* ./
+RUN bun install --frozen-lockfile || bun install
+
+COPY {{ service.dir }}/ .
+
+CMD ["bun", "run", "dev", "--host", "0.0.0.0", "--port", "{{ service.port }}"]

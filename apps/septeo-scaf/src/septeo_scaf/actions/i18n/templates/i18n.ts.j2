@@ -1,0 +1,19 @@
+import i18next from "i18next";
+import { initReactI18next } from "react-i18next";
+import HttpBackend from "i18next-http-backend";
+
+i18next
+  .use(HttpBackend)
+  .use(initReactI18next)
+  .init({
+    fallbackLng: "en",
+    supportedLngs: [{{ languages | map("tojson") | join(", ") }}],
+    backend: {
+      loadPath: "/locales/{% raw %}{{lng}}/{{ns}}{% endraw %}.json",
+    },
+    interpolation: {
+      escapeValue: false,
+    },
+  });
+
+export default i18next;

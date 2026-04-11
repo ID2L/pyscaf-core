@@ -1,0 +1,13 @@
+checks:
+  - name: "HELLO.md exists with default greeting"
+    type: exist
+    file_path: "tmp_project/HELLO.md"
+
+  - name: "HELLO.md contains Hello, World!"
+    type: contains
+    file_path: "tmp_project/HELLO.md"
+    content: "Hello, World!"
+
+  - name: "src directory exists"
+    type: exist
+    file_path: "tmp_project/src"

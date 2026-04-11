@@ -1,0 +1,12 @@
+-- Database initialization for {{ project_name }}
+-- {{ db_type | upper }} {{ db_version }}
+
+{% for ext in extensions -%}
+{% if ext == "pgvector" -%}
+CREATE EXTENSION IF NOT EXISTS vector;
+{% elif ext == "postgis" -%}
+CREATE EXTENSION IF NOT EXISTS postgis;
+{% endif -%}
+{% endfor -%}
+
+-- Add your schema migrations below

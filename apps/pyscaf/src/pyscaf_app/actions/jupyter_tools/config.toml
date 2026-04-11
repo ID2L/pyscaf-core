@@ -1,0 +1,31 @@
+# Jupyter Tools Configuration
+
+[tool.pyscaf.jupyter_tools]
+# Default output directories
+python_notebook_dir = "notebooks/python"
+jupyter_notebook_dir = "notebooks/ipynb"
+pdf_dir = "generated/pdfs"
+html_dir = "generated/html"
+
+# notebook_to_html.py options
+hide_input = false
+hide_output = false
+template_name = "classic"
+template_path = ""
+template_file = ""
+
+[project.scripts]
+# Convenient scripts
+py-to-nb = "pyscaf.jupyter_tools.scripts.py_to_notebook:main"
+exec-nb = "pyscaf.jupyter_tools.scripts.execute_notebook:main"
+nb-to-html = "pyscaf.jupyter_tools.scripts.notebook_to_html:main"
+py-to-nb-all = "pyscaf.jupyter_tools.scripts.main:py_to_nb_all"
+exec-nb-all = "pyscaf.jupyter_tools.scripts.main:exec_nb_all"
+nb-to-html-all = "pyscaf.jupyter_tools.scripts.main:nb_to_html_all"
+
+[dependency-groups]
+dev = [
+    "jupytext",
+    "nbconvert",
+    "tomli",
+]

@@ -1,0 +1,10 @@
+"""{{ project_name }} — FastAPI application."""
+
+from fastapi import FastAPI
+
+app = FastAPI(title="{{ project_name }}")
+
+
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}

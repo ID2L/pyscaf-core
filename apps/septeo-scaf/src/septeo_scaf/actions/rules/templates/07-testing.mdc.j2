@@ -1,0 +1,14 @@
+---
+description: Apply testing patterns. Use when writing or modifying tests.
+globs: tests/**/*
+alwaysApply: false
+---
+
+Test Structure:
+- Unit tests: `tests/<module>/test_*.py`
+- Test data: `tests/<module>/test_data/`
+
+Patterns:
+- AAA: Arrange, Act, Assert
+- Use fixtures for shared setup
+- Use parametrize for data-driven tests

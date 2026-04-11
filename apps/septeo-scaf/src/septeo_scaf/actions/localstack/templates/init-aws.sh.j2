@@ -1,0 +1,15 @@
+#!/bin/bash
+# LocalStack initialization script for {{ project_name }}
+set -euo pipefail
+
+echo "Initializing LocalStack resources..."
+
+# Create default S3 bucket
+awslocal s3 mb s3://{{ project_name }}-assets 2>/dev/null || true
+
+# Create default secrets
+awslocal secretsmanager create-secret \
+    --name "{{ project_name }}/app-secret" \
+    --secret-string '{"key": "local-dev-value"}' 2>/dev/null || true
+
+echo "LocalStack initialization complete."

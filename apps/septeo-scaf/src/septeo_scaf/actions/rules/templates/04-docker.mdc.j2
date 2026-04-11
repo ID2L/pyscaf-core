@@ -1,0 +1,10 @@
+---
+description: Apply Docker conventions. Use for containerized apps.
+globs: .docker/**/*, Dockerfile*
+alwaysApply: false
+---
+
+Docker:
+- Base image in `.docker/Dockerfile.base`
+- Multi-stage builds for production
+- Use `.dockerignore` to exclude dev files

@@ -1,0 +1,8 @@
+parameters:
+    level: 6
+    paths:
+        - src
+{%- if framework == "symfony" %}
+    symfony:
+        containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
+{%- endif %}
