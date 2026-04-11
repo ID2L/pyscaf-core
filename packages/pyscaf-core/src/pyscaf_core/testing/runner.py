@@ -62,30 +62,41 @@ class ActionTestRunner:
 
         return cmd
 
-    def _check_file_exists(self, file_path: str) -> bool:
+    def _resolve_safe_path(self, file_path: str) -> Path | None:
+        """Resolve *file_path* inside ``self.temp_dir``, rejecting escapes."""
         if not self.temp_dir:
-            return False
-        return (self.temp_dir / file_path).exists()
+            return None
+        resolved = (self.temp_dir / file_path).resolve()
+        if not resolved.is_relative_to(self.temp_dir.resolve()):
+            return None
+        return resolved
+
+    def _check_file_exists(self, file_path: str) -> bool:
+        safe = self._resolve_safe_path(file_path)
+        return safe is not None and safe.exists()
 
     def _check_file_contains(self, file_path: str, content: str) -> bool:
-        if not self.temp_dir:
-            return False
-        full = self.temp_dir / file_path
-        if not full.exists():
+        safe = self._resolve_safe_path(file_path)
+        if safe is None or not safe.exists():
             return False
         try:
-            return content in full.read_text(encoding="utf-8")
-        except Exception:
-            return False
+            return content in safe.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError) as exc:
+            raise RuntimeError(f"Cannot read {file_path}: {exc}") from exc
 
     def _execute_custom_check(self, function_path: str) -> bool:
+        """Execute a custom check function.
+
+        Only modules prefixed with ``tests.`` or within the project's own
+        test package are expected.  Callers must ensure YAML sources are trusted.
+        """
         try:
             module_path, function_name = function_path.rsplit(":", 1)
             module = __import__(module_path, fromlist=[function_name])
             func = getattr(module, function_name)
             return bool(func(self.temp_dir))
-        except Exception:
-            return False
+        except Exception as exc:
+            raise RuntimeError(f"Custom check {function_path} failed: {exc}") from exc
 
     def _run_checks(self) -> list[CheckResult]:
         results: list[CheckResult] = []

@@ -2,4 +2,4 @@
 
 from pyscaf_core.testing import create_yaml_tests
 
-test_action = create_yaml_tests("demo-scaf")
+test_action = create_yaml_tests(entry_point_name="demo_scaf")

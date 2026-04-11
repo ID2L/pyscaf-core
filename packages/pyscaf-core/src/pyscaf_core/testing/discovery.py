@@ -45,19 +45,15 @@ def discover_test_files(
     return files
 
 
-def discover_test_files_from_entry_points(
+def discover_test_configs_from_entry_points(
     *,
     group: str = "pyscaf_core.test_yamls",
     filter_name: str | None = None,
-) -> list[tuple[Path, str]]:
-    """Discover YAML test files registered via ``pyscaf_core.test_yamls`` entry points.
-
-    Each entry point should reference a callable returning an
-    :class:`ActionTestConfig` or a ``(yaml_dir, cli_command)`` tuple.
-    """
+) -> list[ActionTestConfig]:
+    """Return all :class:`ActionTestConfig` registered via entry points."""
     from importlib.metadata import entry_points
 
-    all_files: list[tuple[Path, str]] = []
+    configs: list[ActionTestConfig] = []
     for ep in entry_points().select(group=group):
         if filter_name and ep.name != filter_name:
             continue
@@ -68,12 +64,24 @@ def discover_test_files_from_entry_points(
             config = obj
 
         if isinstance(config, ActionTestConfig):
-            yaml_dir = config.yaml_dir
+            configs.append(config)
         elif isinstance(config, tuple) and len(config) == 2:
-            yaml_dir = Path(config[0])
-        else:
-            continue
+            configs.append(ActionTestConfig(yaml_dir=Path(config[0]), cli_command=str(config[1])))
 
-        all_files.extend(discover_test_files(yaml_dir))
+    return configs
 
+
+def discover_test_files_from_entry_points(
+    *,
+    group: str = "pyscaf_core.test_yamls",
+    filter_name: str | None = None,
+) -> list[tuple[Path, str, str]]:
+    """Discover YAML test files registered via ``pyscaf_core.test_yamls`` entry points.
+
+    Returns ``(yaml_path, test_id, cli_command)`` tuples.
+    """
+    all_files: list[tuple[Path, str, str]] = []
+    for config in discover_test_configs_from_entry_points(group=group, filter_name=filter_name):
+        for yaml_path, test_id in discover_test_files(config.yaml_dir):
+            all_files.append((yaml_path, test_id, config.cli_command))
     return all_files

@@ -1,6 +1,5 @@
 """Tests for pyscaf_core.testing.discovery module."""
 
-import tempfile
 from pathlib import Path
 
 from pyscaf_core.testing.discovery import ActionTestConfig, discover_test_files

@@ -1,6 +1,5 @@
 """Tests for pyscaf_core.testing.runner module."""
 
-import tempfile
 from pathlib import Path
 
 import pytest
@@ -114,3 +113,31 @@ class TestActionTestRunner:
         results = runner._run_checks()
         assert results[0]["success"] is False
         assert "Unknown check type" in results[0]["error"]
+
+    def test_path_traversal_blocked(self, tmp_path: Path):
+        yaml_file = self._write_yaml(tmp_path, {"checks": []})
+        runner = ActionTestRunner(yaml_file)
+        runner.temp_dir = tmp_path
+
+        assert runner._check_file_exists("../../../etc/passwd") is False
+        assert runner._check_file_exists("/etc/passwd") is False
+        assert runner._check_file_contains("../../etc/passwd", "root") is False
+
+    def test_custom_check_failure_propagates(self, tmp_path: Path):
+        config = {
+            "checks": [
+                {
+                    "name": "bad custom",
+                    "type": "custom",
+                    "function_path": "nonexistent.module:func",
+                }
+            ]
+        }
+        yaml_file = self._write_yaml(tmp_path, config)
+        runner = ActionTestRunner(yaml_file)
+        runner.temp_dir = tmp_path
+
+        results = runner._run_checks()
+        assert results[0]["success"] is False
+        assert results[0]["error"] is not None
+        assert "Custom check" in results[0]["error"]

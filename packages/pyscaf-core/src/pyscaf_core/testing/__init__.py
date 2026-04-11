@@ -6,6 +6,7 @@ packages can reuse without duplicating test logic.
 
 from pyscaf_core.testing.discovery import (
     ActionTestConfig,
+    discover_test_configs_from_entry_points,
     discover_test_files,
     discover_test_files_from_entry_points,
 )
@@ -17,13 +18,14 @@ __all__ = [
     "CheckResult",
     "TestResult",
     "create_yaml_tests",
+    "discover_test_configs_from_entry_points",
     "discover_test_files",
     "discover_test_files_from_entry_points",
 ]
 
 
 def create_yaml_tests(
-    cli_command: str,
+    cli_command: str | None = None,
     yaml_dir: str | None = None,
     *,
     entry_point_name: str | None = None,
@@ -33,14 +35,20 @@ def create_yaml_tests(
     Usage in downstream test file::
 
         from pyscaf_core.testing import create_yaml_tests
+
+        # Explicit directory + CLI command
         test_action = create_yaml_tests("demo-scaf", yaml_dir=__file__)
 
+        # Auto-discover from entry points (cli_command from config)
+        test_action = create_yaml_tests(entry_point_name="demo_scaf")
+
     Args:
-        cli_command: CLI command to invoke (e.g. "demo-scaf", "pyscaf-app")
+        cli_command: CLI command to invoke.  Required when *yaml_dir* is given.
+                     When using entry-point discovery this is optional (each
+                     config provides its own ``cli_command``).
         yaml_dir: Path to directory containing YAML test files, or path to the
-                  test file itself (will use its parent directory). If None,
-                  uses entry points.
-        entry_point_name: If yaml_dir is None, filter entry points by this name.
+                  test file itself (will use its parent directory).
+        entry_point_name: Filter entry points by this name.
 
     Returns:
         A pytest-parametrized test function named ``test_action``.
@@ -50,18 +58,20 @@ def create_yaml_tests(
     import pytest
 
     if yaml_dir is not None:
+        if cli_command is None:
+            raise ValueError("cli_command is required when yaml_dir is provided")
         base = Path(yaml_dir)
         if base.is_file():
             base = base.parent
-        files = discover_test_files(base)
+        test_params = [(f, tid, cli_command) for f, tid in discover_test_files(base)]
     else:
-        files = discover_test_files_from_entry_points(filter_name=entry_point_name)
+        test_params = discover_test_files_from_entry_points(filter_name=entry_point_name)
 
-    test_ids = [test_id for _, test_id in files]
+    test_ids = [test_id for _, test_id, _ in test_params]
 
-    @pytest.mark.parametrize("test_file,test_id", files, ids=test_ids)
-    def test_action(test_file: Path, test_id: str):
-        runner = ActionTestRunner(test_file, cli_command=cli_command)
+    @pytest.mark.parametrize("test_file,test_id,cmd", test_params, ids=test_ids)
+    def test_action(test_file: Path, test_id: str, cmd: str):
+        runner = ActionTestRunner(test_file, cli_command=cmd)
         result: TestResult = runner.run_test()
 
         failed = [c for c in result["check_results"] if not c["success"]]
