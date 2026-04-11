@@ -43,6 +43,72 @@ class TestActionTestRunner:
         assert "--git" in cmd
         assert "--no-no-install" in cmd
 
+    def test_build_cli_command_with_list_options(self, tmp_path: Path):
+        config = {
+            "cli_arguments": {
+                "options": {"apps": ["backend", "frontend"]}
+            },
+            "checks": [],
+        }
+        yaml_file = self._write_yaml(tmp_path, config)
+        runner = ActionTestRunner(yaml_file, cli_command="my-cli")
+        cmd = runner._build_cli_command()
+
+        assert cmd.count("--apps") == 2
+        apps_indices = [i for i, v in enumerate(cmd) if v == "--apps"]
+        assert cmd[apps_indices[0] + 1] == "backend"
+        assert cmd[apps_indices[1] + 1] == "frontend"
+
+    def test_build_cli_command_with_single_item_list(self, tmp_path: Path):
+        config = {
+            "cli_arguments": {
+                "options": {"apps": ["backend"]}
+            },
+            "checks": [],
+        }
+        yaml_file = self._write_yaml(tmp_path, config)
+        runner = ActionTestRunner(yaml_file, cli_command="my-cli")
+        cmd = runner._build_cli_command()
+
+        assert cmd.count("--apps") == 1
+        idx = cmd.index("--apps")
+        assert cmd[idx + 1] == "backend"
+
+    def test_build_cli_command_with_empty_list(self, tmp_path: Path):
+        config = {
+            "cli_arguments": {
+                "options": {"apps": []}
+            },
+            "checks": [],
+        }
+        yaml_file = self._write_yaml(tmp_path, config)
+        runner = ActionTestRunner(yaml_file, cli_command="my-cli")
+        cmd = runner._build_cli_command()
+
+        assert "--apps" not in cmd
+
+    def test_build_cli_command_mixed_option_types(self, tmp_path: Path):
+        config = {
+            "cli_arguments": {
+                "options": {
+                    "verbose": True,
+                    "apps": ["backend", "frontend"],
+                    "name": "myproject",
+                    "no-cache": False,
+                }
+            },
+            "checks": [],
+        }
+        yaml_file = self._write_yaml(tmp_path, config)
+        runner = ActionTestRunner(yaml_file, cli_command="my-cli")
+        cmd = runner._build_cli_command()
+
+        assert "--verbose" in cmd
+        assert cmd.count("--apps") == 2
+        assert "--name" in cmd
+        assert "myproject" in cmd
+        assert "--no-no-cache" in cmd
+
     def test_build_cli_command_with_positionals(self, tmp_path: Path):
         config = {
             "cli_arguments": {"positionals": ["create", "my-proj"]},
