@@ -57,6 +57,9 @@ class ActionTestRunner:
         for key, value in self.config.get("cli_arguments", {}).get("options", {}).items():
             if isinstance(value, bool):
                 cmd.append(f"--{key}" if value else f"--no-{key}")
+            elif isinstance(value, list):
+                for item in value:
+                    cmd.extend([f"--{key}", str(item)])
             else:
                 cmd.extend([f"--{key}", str(value)])
 
