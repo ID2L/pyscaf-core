@@ -1,6 +1,32 @@
 # CHANGELOG
 
 
+## v0.2.1 (2026-04-11)
+
+### Bug Fixes
+
+- **pyscaf-core**: Harden testing framework security and API
+  ([`9582c6b`](https://github.com/ID2L/pyscaf-core/commit/9582c6b572c48b1b4e16d0f82aa0af6f6ffeaa11))
+
+- Add path traversal protection in ActionTestRunner (resolve + is_relative_to) - Propagate
+  exceptions from custom checks instead of silent failure - Propagate cli_command from entry point
+  configs through discovery API - Add discover_test_configs_from_entry_points() for typed config
+  access - Add security tests for path traversal and custom check error propagation - Fix lint
+  issues (unused imports)
+
+Made-with: Cursor
+
+### Documentation
+
+- **specs**: Add review report for spec 901
+  ([`7a6cd97`](https://github.com/ID2L/pyscaf-core/commit/7a6cd978653f6c272f7e2a38ea0d386ab75e9b21))
+
+Review approved: all acceptance criteria met, security issues fixed, 91/91 tests passing.
+  Medium-priority test coverage improvements noted for follow-up.
+
+Made-with: Cursor
+
+
 ## v0.2.0 (2026-04-11)
 
 ### Chores
