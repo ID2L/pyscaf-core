@@ -1,6 +1,57 @@
 # CHANGELOG
 
 
+## v0.3.0 (2026-04-12)
+
+### Build System
+
+- **deps**: Add mkdocs, mkdocs-material, mkdocstrings[python] to dev group
+  ([`d3ed797`](https://github.com/ID2L/pyscaf-core/commit/d3ed797354eeda208f20992ef91e801ddeec9429))
+
+Made-with: Cursor
+
+### Documentation
+
+- Update readme with docs link and add phase 11 to todo
+  ([`987def4`](https://github.com/ID2L/pyscaf-core/commit/987def423ded142e5ca3c6582bdcd090706e337b))
+
+Made-with: Cursor
+
+- **pyscaf-core**: Add missing docstring and return type for api docs
+  ([`5e0cd90`](https://github.com/ID2L/pyscaf-core/commit/5e0cd907bd1362fe9134e4cce6058f4aa6a5985d))
+
+Add docstring to CLIOption class and return type annotation to create_yaml_tests to fix mkdocs
+  strict build warnings.
+
+Made-with: Cursor
+
+- **specs**: Add specification for static documentation site (1002)
+  ([`7df6d2c`](https://github.com/ID2L/pyscaf-core/commit/7df6d2cbc111e45bf8ab8d8bf451ff3749062ac5))
+
+Includes spec.md, plan.md, tasks.md, research.md, quickstart.md, stats.md, review.md and prompt.md.
+  Technology comparison evaluated MkDocs+Material, Sphinx, Starlight, and pdoc.
+
+Made-with: Cursor
+
+### Features
+
+- **docs**: Add mkdocs documentation site with api reference
+  ([`40e4747`](https://github.com/ID2L/pyscaf-core/commit/40e47476e5cac399bbbe006b78b50ca241c86dfa))
+
+Add static documentation site using MkDocs + Material + mkdocstrings: - mkdocs.yml with Material
+  theme, search, and code copy - 4 guide pages (index, getting-started, architecture,
+  creating-actions) - 6 API reference pages generated from pyscaf_core source via Griffe - GitHub
+  Actions workflow for automated GitHub Pages deployment - .gitignore entry for site/ build output
+
+Made-with: Cursor
+
+- **docs**: Merge feat/1002-static-docs-site
+  ([`392a575`](https://github.com/ID2L/pyscaf-core/commit/392a57502d370ae278f78018a5b61560ca5456f0))
+
+Add static documentation site (MkDocs + Material + mkdocstrings) with API reference, guide pages,
+  and GitHub Pages deployment.
+
+
 ## v0.2.2 (2026-04-11)
 
 ### Bug Fixes
