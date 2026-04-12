@@ -50,6 +50,18 @@ Run tests:
 uv run pytest -q
 ```
 
+## Documentation
+
+The documentation site is built with MkDocs + Material and deployed to GitHub Pages:
+
+**Live site**: [https://id2l.github.io/pyscaf-core/](https://id2l.github.io/pyscaf-core/)
+
+Preview locally:
+
+```bash
+uv run mkdocs serve
+```
+
 ## Resolved decisions
 
 - **PyPI distribution name**: `pyscaf-core`

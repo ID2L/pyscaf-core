@@ -25,6 +25,8 @@ class ChoiceOption(BaseModel):
 
 
 class CLIOption(BaseModel):
+    """Declares a CLI option for an action, supporting strings, booleans, integers, and rich choices."""
+
     name: str
     type: str = "str"
     help: str | None = None
