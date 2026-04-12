@@ -4,6 +4,8 @@ Provides YAML-driven action testing infrastructure that downstream
 packages can reuse without duplicating test logic.
 """
 
+from typing import Any
+
 from pyscaf_core.testing.discovery import (
     ActionTestConfig,
     discover_test_configs_from_entry_points,
@@ -29,7 +31,7 @@ def create_yaml_tests(
     yaml_dir: str | None = None,
     *,
     entry_point_name: str | None = None,
-):
+) -> Any:
     """Create a parametrized pytest test function for YAML action tests.
 
     Usage in downstream test file::
