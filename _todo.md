@@ -96,3 +96,14 @@
 - [X] F1003 — `.github/workflows/release.yml` (auto TestPyPI)
 - [X] F1004 — `.github/workflows/deploy-production-manual.yml` (prod manuelle)
 - [X] Validation Phase 10 (ruff)
+
+# Phase 11 — Documentation statique (GitHub Pages)
+
+- [X] F1002-spec — Spécification : `specs/1002-static-docs-site/`
+- [X] F1101 — Deps MkDocs + Material + mkdocstrings dans `pyproject.toml`
+- [X] F1102 — `mkdocs.yml` (config, thème, plugins, nav)
+- [X] F1103 — Guide pages (`docs/index.md`, `getting-started.md`, `architecture.md`, `creating-actions.md`)
+- [X] F1104 — API Reference pages (`docs/reference/` — actions, cli, preference_chain, tools, testing)
+- [X] F1105 — `.github/workflows/docs.yml` (build + deploy GitHub Pages)
+- [X] F1106 — `.gitignore` + README mis à jour
+- [X] F1107 — Validation build (`uv run mkdocs build --strict` via Docker)
