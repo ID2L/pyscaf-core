@@ -1,6 +1,6 @@
 # Feature Specification: Semantic Release for pyscaf-core
 
-**Feature Branch**: `1001-semantic-release`
+**Feature Branch**: `014-semantic-release`
 **Created**: 2025-04-09
 **Status**: Draft
 **Input**: User description: "Add semantic release configuration and GitHub Actions for pyscaf-core, following the pattern from open-pyscaf."

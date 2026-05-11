@@ -21,9 +21,9 @@ The roadmap is intentionally incremental: establish package boundaries and disco
 | 0 | F003 | [specs/003-demo-scaf-app-skeleton/spec.md](../003-demo-scaf-app-skeleton/spec.md) | Specified |
 | 0 | F004 | [specs/004-docker-dev-ci/spec.md](../004-docker-dev-ci/spec.md) | Specified |
 | 0 | F005 | [specs/005-readme-docker-docs/spec.md](../005-readme-docker-docs/spec.md) | Specified |
-| 1 | F101 | [specs/101-preference-chain-core-apis/spec.md](../101-preference-chain-core-apis/spec.md) | Specified |
-| 1 | F102 | [specs/102-preference-chain-loader-tree-walker/spec.md](../102-preference-chain-loader-tree-walker/spec.md) | Specified |
-| 1 | F103 | [specs/103-preference-chain-tests/spec.md](../103-preference-chain-tests/spec.md) | Specified |
+| 1 | F101 | [specs/007-preference-chain-core-apis/spec.md](../007-preference-chain-core-apis/spec.md) | Specified |
+| 1 | F102 | [specs/008-preference-chain-loader-tree-walker/spec.md](../008-preference-chain-loader-tree-walker/spec.md) | Specified |
+| 1 | F103 | [specs/009-preference-chain-tests/spec.md](../009-preference-chain-tests/spec.md) | Specified |
 
 **Next to specify** (Phase 2): F201–F205 per [feature-inventory.md](./feature-inventory.md).
 
@@ -322,6 +322,6 @@ Project policy requires running commands in **Docker**. The Phase 0 deliverable 
 | 3 | F003 | [003-demo-scaf-app-skeleton](../003-demo-scaf-app-skeleton/spec.md) |
 | 4 | F004 | [004-docker-dev-ci](../004-docker-dev-ci/spec.md) |
 | 5 | F005 | [005-readme-docker-docs](../005-readme-docker-docs/spec.md) |
-| 6 | F101 | [101-preference-chain-core-apis](../101-preference-chain-core-apis/spec.md) |
-| 7 | F102 | [102-preference-chain-loader-tree-walker](../102-preference-chain-loader-tree-walker/spec.md) |
-| 8 | F103 | [103-preference-chain-tests](../103-preference-chain-tests/spec.md) |
+| 6 | F101 | [007-preference-chain-core-apis](../007-preference-chain-core-apis/spec.md) |
+| 7 | F102 | [008-preference-chain-loader-tree-walker](../008-preference-chain-loader-tree-walker/spec.md) |
+| 8 | F103 | [009-preference-chain-tests](../009-preference-chain-tests/spec.md) |

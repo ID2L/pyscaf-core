@@ -1,8 +1,8 @@
-# Review: 1002-static-docs-site
+# Review: 015-static-docs-site
 
 **Date**: 2026-04-12
 **Reviewer**: AI (Claude Opus 4.6)
-**Branch**: `feat/1002-static-docs-site`
+**Branch**: `feat/015-static-docs-site`
 
 ---
 

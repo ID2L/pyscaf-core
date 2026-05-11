@@ -1,6 +1,6 @@
 # Feature Specification: Static Documentation Site
 
-**Feature Branch**: `1002-static-docs-site`
+**Feature Branch**: `015-static-docs-site`
 **Created**: 2026-04-12
 **Status**: Draft
 **Input**: User description: "Doc statique hébergée sur GitHub Pages, doc technique générée depuis le code. Choix : Starlight ou solution pythonesque."

@@ -1,6 +1,6 @@
 # Review: Semantic Release for pyscaf-core
 
-**Spec**: `specs/1001-semantic-release/`
+**Spec**: `specs/014-semantic-release/`
 **Date**: 2025-04-09
 **Reviewer**: AI (Claude 4.6 Opus)
 

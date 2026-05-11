@@ -81,4 +81,4 @@ Pour chaque classe `*Action` :
 
 ## Références internes
 
-- Spécification fondation apps : `specs/601-stress-apps-skeleton/spec.md` (F601–F603, conventions templates, nommage `pyscaf-app`).
+- Spécification fondation apps : `specs/010-stress-apps-skeleton/spec.md` (F601–F603, conventions templates, nommage `pyscaf-app`).

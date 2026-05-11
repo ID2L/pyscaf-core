@@ -92,4 +92,4 @@ Respecter l’ordre implicite : **localstack** après **docker** ; **pipeline** 
 ## Références
 
 - Roadmap Phase 8 : `specs/roadmap/feature-inventory-stress-test.md` (F801–F806).
-- Spécification analogue (pyscaf) : `specs/701-pyscaf-actions-port/spec.md`.
+- Spécification analogue (pyscaf) : `specs/011-pyscaf-actions-port/spec.md`.

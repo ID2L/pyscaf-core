@@ -19,9 +19,9 @@ Use each row as a single **`/specify`** or ticket scope. Complexity: S = small, 
 
 | ID | Feature | Priority | Complexity | Dependencies | Phase | Spec |
 |----|---------|----------|------------|--------------|-------|------|
-| F101 | Port chain resolution (`Node`, `ExtendedNode`, `ChainLink`, `extend_nodes`, `build_chains`, path scoring, `best_execution_order`, `CircularDependencyError`) | P0 | L | F002 | 1 | [spec](../101-preference-chain-core-apis/spec.md) |
-| F102 | Port `dependency_loader.py`, `tree_walker.py` (model covered in F101) | P1 | M | F101 | 1 | [spec](../102-preference-chain-loader-tree-walker/spec.md) |
-| F103 | Port tests from `septeo-agentic-scaffolder/tests/preference_chain/` | P0 | M | F101 | 1 | [spec](../103-preference-chain-tests/spec.md) |
+| F101 | Port chain resolution (`Node`, `ExtendedNode`, `ChainLink`, `extend_nodes`, `build_chains`, path scoring, `best_execution_order`, `CircularDependencyError`) | P0 | L | F002 | 1 | [spec](../007-preference-chain-core-apis/spec.md) |
+| F102 | Port `dependency_loader.py`, `tree_walker.py` (model covered in F101) | P1 | M | F101 | 1 | [spec](../008-preference-chain-loader-tree-walker/spec.md) |
+| F103 | Port tests from `septeo-agentic-scaffolder/tests/preference_chain/` | P0 | M | F101 | 1 | [spec](../009-preference-chain-tests/spec.md) |
 
 ## Phase 2 — Actions base, TOML, discovery primitives
 

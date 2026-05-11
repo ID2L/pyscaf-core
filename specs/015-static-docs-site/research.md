@@ -1,6 +1,6 @@
 # Technology Research: Static Documentation Site
 
-**Feature**: `1002-static-docs-site`
+**Feature**: `015-static-docs-site`
 **Date**: 2026-04-12
 
 ---

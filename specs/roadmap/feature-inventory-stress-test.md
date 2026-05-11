@@ -8,7 +8,7 @@
 
 | ID | Feature | Priorité | Complexité | Dépendances | Spec (à créer) |
 |----|---------|----------|------------|-------------|----------------|
-| F601 | Créer `apps/pyscaf` et `apps/septeo-scaf` : `pyproject.toml`, layout `src/`, dépendance `pyscaf-core` workspace, scripts CLI (`pyscaf` / `septeo-scaf` ou noms validés), stubs `main.py` + `actions/__init__.py` (pattern `demo-scaf`) | P0 | M | Phases 0–5 | `specs/601-stress-apps-skeleton/` |
+| F601 | Créer `apps/pyscaf` et `apps/septeo-scaf` : `pyproject.toml`, layout `src/`, dépendance `pyscaf-core` workspace, scripts CLI (`pyscaf` / `septeo-scaf` ou noms validés), stubs `main.py` + `actions/__init__.py` (pattern `demo-scaf`) | P0 | M | Phases 0–5 | `specs/010-stress-apps-skeleton/` |
 | F602 | Convention unique pour embarquer templates : Hatchling (`packages` / `force-include`), chemins stables, helper partagé ou doc pour `importlib.resources` (ou équivalent) depuis les actions | P0 | M | F601 | `specs/602-stress-template-packaging/` |
 | F603 | Étendre la config pytest racine (`testpaths`, optionnellement marqueurs `integration` / `slow`) pour les nouvelles apps ; aligner `uv run pytest` | P0 | S | F601 | `specs/603-stress-pytest-wiring/` (ou fusion F601) |
 | F604 | Stratégie **Docker** pour valider cette piste (Dockerfile minimal ou `compose`, commandes documentées) ; réconciliation avec workflow `uv` natif post-F006 | P0 | M | F001–F005 (contexte) | `specs/604-stress-docker-ci/` |
@@ -95,7 +95,7 @@ F901, F902, F903
 
 | ID | Dossier suggéré |
 |----|-----------------|
-| F601 | `601-stress-apps-skeleton` |
+| F601 | `010-stress-apps-skeleton` |
 | F602 | `602-stress-template-packaging` |
 | F603 | `603-stress-pytest-wiring` |
 | F604 | `604-stress-docker-ci` |

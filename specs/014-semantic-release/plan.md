@@ -1,6 +1,6 @@
 # Implementation Plan: Semantic Release for pyscaf-core
 
-**Branch**: `1001-semantic-release` | **Date**: 2025-04-09 | **Spec**: spec.md
+**Branch**: `014-semantic-release` | **Date**: 2025-04-09 | **Spec**: spec.md
 
 ## Summary
 

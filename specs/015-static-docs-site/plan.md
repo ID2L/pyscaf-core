@@ -1,6 +1,6 @@
 # Implementation Plan: Static Documentation Site
 
-**Branch**: `1002-static-docs-site` | **Date**: 2026-04-12 | **Spec**: [spec.md](./spec.md)
+**Branch**: `015-static-docs-site` | **Date**: 2026-04-12 | **Spec**: [spec.md](./spec.md)
 
 ---
 

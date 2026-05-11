@@ -1,6 +1,6 @@
 # AI Processing Stats: Semantic Release for pyscaf-core
 
-**Feature**: `1001-semantic-release`
+**Feature**: `014-semantic-release`
 **Created**: 2025-04-09
 **Last Updated**: 2025-04-09
 

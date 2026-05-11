@@ -35,9 +35,9 @@ The following files contain Docker references in historical context. These are *
 - `specs/001-uv-workspace-root/spec.md` — validation section references Docker
 - `specs/002-pyscaf-core-package-skeleton/spec.md` — validation section references Docker
 - `specs/003-demo-scaf-app-skeleton/spec.md` — validation section references Docker
-- `specs/101-preference-chain-core-apis/spec.md` — validation section references Docker
-- `specs/102-preference-chain-loader-tree-walker/spec.md` — validation section references Docker
-- `specs/103-preference-chain-tests/spec.md` — validation section references Docker
+- `specs/007-preference-chain-core-apis/spec.md` — validation section references Docker
+- `specs/008-preference-chain-loader-tree-walker/spec.md` — validation section references Docker
+- `specs/009-preference-chain-tests/spec.md` — validation section references Docker
 - `specs/roadmap/roadmap.md` — describes Docker as historical development approach
 - `specs/roadmap/feature-inventory.md` — lists F004/F005 feature titles
 
