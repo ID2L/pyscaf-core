@@ -1,6 +1,6 @@
 [project]
 name = "pyscaf-core"
-version = "0.3.0"
+version = "0.3.1"
 requires-python = ">=3.12"
 dependencies = [
     "pydantic>=2.0",
@@ -13,6 +13,7 @@ dependencies = [
 
 [project.entry-points."pytest11"]
 pyscaf_core = "pyscaf_core.testing.pytest_plugin"
+
 
 [build-system]
 requires = ["hatchling>=1.26.0"]

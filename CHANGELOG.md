@@ -1,6 +1,20 @@
 # CHANGELOG
 
 
+## v0.3.1 (2026-05-16)
+
+### Bug Fixes
+
+- Update handling of unanswered CLI options
+  ([`31091a8`](https://github.com/ID2L/pyscaf-core/commit/31091a87ab2c9130f222e710e5977d84e17a8077))
+
+Refactor the ActionManager to treat empty tuples and lists as unanswered values in both
+  `ask_interactive_questions()` and `run_postfill_hooks()`. Introduced a new helper function
+  `_is_unanswered()` to centralize this logic. Added unit tests to ensure correct behavior for
+  various scenarios, including empty and non-empty tuples. Removed outdated test_version.py file as
+  it is no longer relevant.
+
+
 ## v0.3.0 (2026-04-12)
 
 ### Build System
@@ -9,6 +23,11 @@
   ([`d3ed797`](https://github.com/ID2L/pyscaf-core/commit/d3ed797354eeda208f20992ef91e801ddeec9429))
 
 Made-with: Cursor
+
+### Chores
+
+- Reindex spec
+  ([`6ba42c2`](https://github.com/ID2L/pyscaf-core/commit/6ba42c21f5428b52887a7cbe4376d994b7666031))
 
 ### Documentation
 
