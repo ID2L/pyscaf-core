@@ -13,6 +13,19 @@ from pyscaf_core.preference_chain.model import Node
 logger = logging.getLogger(__name__)
 
 
+def _is_unanswered(value: Any) -> bool:
+    """Return True if the value represents an unanswered CLI option.
+
+    Click sets multiple=True defaults to () rather than None.
+    Both () and [] should be treated as "not yet answered".
+    """
+    if value is None:
+        return True
+    if isinstance(value, (tuple, list)) and len(value) == 0:
+        return True
+    return False
+
+
 class ActionManager:
     """Manager for all project actions."""
 
@@ -64,9 +77,7 @@ class ActionManager:
         logger.debug("Final action execution order: %s", order)
 
         self.actions = [
-            action_class_by_id[action_id](self.project_path)
-            for action_id in order
-            if action_id in action_class_by_id
+            action_class_by_id[action_id](self.project_path) for action_id in order if action_id in action_class_by_id
         ]
 
     def run_postfill_hooks(self, context: dict) -> dict:
@@ -75,7 +86,7 @@ class ActionManager:
             if action.activate(context):
                 for opt in action.cli_options:
                     context_key = cli_option_to_key(opt)
-                    if context.get(context_key) is None:
+                    if _is_unanswered(context.get(context_key)):
                         continue
                     if opt.visible_when and not opt.visible_when(context):
                         continue
@@ -89,7 +100,7 @@ class ActionManager:
             if action.activate(context):
                 for opt in action.cli_options:
                     context_key = cli_option_to_key(opt)
-                    if context.get(context_key) is not None:
+                    if not _is_unanswered(context.get(context_key)):
                         continue
                     if opt.visible_when and not opt.visible_when(context):
                         continue
@@ -101,22 +112,16 @@ class ActionManager:
                     if opt.type == "bool":
                         answer = questionary.confirm(prompt, default=bool(default)).ask()
                     elif opt.type == "int":
-                        answer = questionary.text(
-                            prompt, default=str(default) if default is not None else ""
-                        ).ask()
+                        answer = questionary.text(prompt, default=str(default) if default is not None else "").ask()
                         answer = int(answer) if answer is not None and answer != "" else None
                     elif opt.type == "choice" and opt.choices:
                         choices = opt.get_choice_displays()
                         default_display = opt.get_default_display()
 
                         if opt.multiple:
-                            answer = questionary.checkbox(
-                                prompt, choices=choices, default=default_display
-                            ).ask()
+                            answer = questionary.checkbox(prompt, choices=choices, default=default_display).ask()
                         else:
-                            answer = questionary.select(
-                                prompt, choices=choices, default=default_display
-                            ).ask()
+                            answer = questionary.select(prompt, choices=choices, default=default_display).ask()
 
                         if answer:
                             if opt.multiple:
@@ -134,9 +139,7 @@ class ActionManager:
                                         break
 
                     else:
-                        answer = questionary.text(
-                            prompt, default=default if default is not None else ""
-                        ).ask()
+                        answer = questionary.text(prompt, default=default if default is not None else "").ask()
                     context[context_key] = answer
                     if opt.postfill_hook:
                         context = opt.postfill_hook(context)

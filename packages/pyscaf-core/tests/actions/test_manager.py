@@ -4,8 +4,34 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
-from pyscaf_core.actions import Action, CLIOption
-from pyscaf_core.actions.manager import ActionManager
+from pyscaf_core.actions import Action, ChoiceOption, CLIOption
+from pyscaf_core.actions.manager import ActionManager, _is_unanswered
+
+
+class TestIsUnanswered:
+    def test_none_is_unanswered(self):
+        assert _is_unanswered(None) is True
+
+    def test_empty_tuple_is_unanswered(self):
+        assert _is_unanswered(()) is True
+
+    def test_empty_list_is_unanswered(self):
+        assert _is_unanswered([]) is True
+
+    def test_nonempty_tuple_is_answered(self):
+        assert _is_unanswered(("a",)) is False
+
+    def test_nonempty_list_is_answered(self):
+        assert _is_unanswered(["a"]) is False
+
+    def test_string_is_answered(self):
+        assert _is_unanswered("hello") is False
+
+    def test_false_is_answered(self):
+        assert _is_unanswered(False) is False
+
+    def test_zero_is_answered(self):
+        assert _is_unanswered(0) is False
 
 
 class TestActionManagerOrdering:
@@ -84,6 +110,40 @@ class TestActionManagerPostfillHooks:
         context = manager.run_postfill_hooks({"visible": "value"})
         assert context["hook_ran"] is True
 
+    def test_skips_postfill_for_empty_tuple(self):
+        hook_called = []
+
+        def my_hook(ctx):
+            hook_called.append(True)
+            return ctx
+
+        class _TestAction(Action):
+            depends: set[str] = set()
+            cli_options = [
+                CLIOption(name="--source", type="str", postfill_hook=my_hook),
+            ]
+
+        manager = ActionManager("test", {}, action_classes=[_TestAction])
+        manager.run_postfill_hooks({"source": ()})
+        assert not hook_called
+
+    def test_runs_postfill_for_nonempty_tuple(self):
+        hook_called = []
+
+        def my_hook(ctx):
+            hook_called.append(True)
+            return ctx
+
+        class _TestAction(Action):
+            depends: set[str] = set()
+            cli_options = [
+                CLIOption(name="--source", type="str", postfill_hook=my_hook),
+            ]
+
+        manager = ActionManager("test", {}, action_classes=[_TestAction])
+        manager.run_postfill_hooks({"source": ("val",)})
+        assert hook_called
+
 
 class TestActionManagerInteractive:
     def test_skips_question_when_visible_when_false(self):
@@ -127,6 +187,53 @@ class TestActionManagerInteractive:
             context = manager.ask_interactive_questions({})
 
         assert context["conditional"] == "my_answer"
+
+    def test_ask_interactive_shows_prompt_for_empty_tuple(self):
+        class _TestAction(Action):
+            depends: set[str] = set()
+            cli_options = [
+                CLIOption(
+                    name="--bricks",
+                    type="choice",
+                    multiple=True,
+                    prompt="Bricks?",
+                    choices=[
+                        ChoiceOption(key="frontend", display="Frontend", value="frontend"),
+                        ChoiceOption(key="backend", display="Backend", value="backend"),
+                    ],
+                ),
+            ]
+
+        manager = ActionManager("test", {}, action_classes=[_TestAction])
+        with patch("questionary.checkbox") as mock_checkbox:
+            mock_checkbox.return_value.ask.return_value = ["Frontend"]
+            context = manager.ask_interactive_questions({"bricks": ()})
+
+        mock_checkbox.assert_called_once()
+        assert context["bricks"] == ["frontend"]
+
+    def test_ask_interactive_skips_prompt_for_nonempty_tuple(self):
+        class _TestAction(Action):
+            depends: set[str] = set()
+            cli_options = [
+                CLIOption(
+                    name="--bricks",
+                    type="choice",
+                    multiple=True,
+                    prompt="Bricks?",
+                    choices=[
+                        ChoiceOption(key="frontend", display="Frontend", value="frontend"),
+                        ChoiceOption(key="backend", display="Backend", value="backend"),
+                    ],
+                ),
+            ]
+
+        manager = ActionManager("test", {}, action_classes=[_TestAction])
+        with patch("questionary.checkbox") as mock_checkbox:
+            context = manager.ask_interactive_questions({"bricks": ("frontend",)})
+
+        mock_checkbox.assert_not_called()
+        assert context["bricks"] == ("frontend",)
 
 
 class TestActionManagerCreateProject:
